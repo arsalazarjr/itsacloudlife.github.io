@@ -132,19 +132,20 @@ $(document).ready(function() {
 
 $(document).ready(function() {
     $('.categories ul li:first-child a').addClass("visible");
-    $('.carousel.aws').hide();
+   
+    $('.carousel.cool').hide();
     $('.carousel.docker').hide();
+    $('.carousel.general').hide();
+    $('.carousel.hosted-email').hide();
+    $('.carousel.hosted-voip').hide();
     $('.carousel.howto').hide();
     $('.carousel.iaas').hide();
+    $('.carousel.news').hide();
+    $('.carousel.troubleshooting').hide();
 
 
-    $('.categories ul li .allcat').click(function(e){
-        $('.carousel.allcat').fadeIn();
-        $(this).addClass("visible");
-        $('.categories ul li a').not($(this)).removeClass("visible");
-        $('.blog .carousel').not($('.allcat')).fadeOut();
-        e.preventDefault();
-    });
+  
+
 
     $('.categories ul li .aws').click(function(e){
         $('.carousel.aws').fadeIn();
@@ -154,11 +155,43 @@ $(document).ready(function() {
         e.preventDefault();
     });
 
+    $('.categories ul li .cool').click(function(e){
+        $('.carousel.cool').fadeIn();
+        $(this).addClass("visible");
+        $('.categories ul li a').not($(this)).removeClass("visible");
+        $('.blog .carousel').not($('.cool')).fadeOut();
+        e.preventDefault();
+    });
+
     $('.categories ul li .docker').click(function(e){
         $('.carousel.docker').fadeIn();
         $(this).addClass("visible");
         $('.categories ul li a').not($(this)).removeClass("visible");
         $('.blog .carousel').not($('.docker')).fadeOut();
+        e.preventDefault();
+    });
+
+    $('.categories ul li .general').click(function(e){
+        $('.carousel.general').fadeIn();
+        $(this).addClass("visible");
+        $('.categories ul li a').not($(this)).removeClass("visible");
+        $('.blog .carousel').not($('.general')).fadeOut();
+        e.preventDefault();
+    });
+
+    $('.categories ul li .hosted-email').click(function(e){
+        $('.carousel.hosted-email').fadeIn();
+        $(this).addClass("visible");
+        $('.categories ul li a').not($(this)).removeClass("visible");
+        $('.blog .carousel').not($('.hosted-email')).fadeOut();
+        e.preventDefault();
+    });
+
+    $('.categories ul li .hosted-voip').click(function(e){
+        $('.carousel.hosted-voip').fadeIn();
+        $(this).addClass("visible");
+        $('.categories ul li a').not($(this)).removeClass("visible");
+        $('.blog .carousel').not($('.hosted-voip')).fadeOut();
         e.preventDefault();
     });
 
@@ -175,6 +208,22 @@ $(document).ready(function() {
         $(this).addClass("visible");
         $('.categories ul li a').not($(this)).removeClass("visible");
         $('.blog .carousel').not($('.iaas')).fadeOut();
+        e.preventDefault();
+    });
+
+    $('.categories ul li .news').click(function(e){
+        $('.carousel.news').fadeIn();
+        $(this).addClass("visible");
+        $('.categories ul li a').not($(this)).removeClass("visible");
+        $('.blog .carousel').not($('.news')).fadeOut();
+        e.preventDefault();
+    });
+
+    $('.categories ul li .troubleshooting').click(function(e){
+        $('.carousel.troubleshooting').fadeIn();
+        $(this).addClass("visible");
+        $('.categories ul li a').not($(this)).removeClass("visible");
+        $('.blog .carousel').not($('.troubleshooting')).fadeOut();
         e.preventDefault();
     });
 
@@ -202,42 +251,45 @@ $(document).ready(function() {
 /* Contact form */
 
 $(document).ready(function(){
+    $('.spinning').hide();
+    $('#submit').prop('disabled', false);
     $("#submit").click(function(){
+        $('.spinning').show();
+        $('#submit').prop('disabled', true);
         var name = $("#name").val();
         var company = $("#company").val();
         var email = $("#email").val();
         var phone = $("#phone").val();
-
-        var value_string='';
-        $("input[name='services[]']").each( function () {
-           var services = $(this).val();
-           
-            if ($(this).is(":checked"))
-            {
-              value_string+=services+",";
-            }
-        });
-
-        value_string_all = value_string.replace(/,\s*$/, "");
-
         var msg = $("#msg").val();
 
+        // var value_string='';
+        // $("input[name='services[]']").each( function () {
+        //    var services = $(this).val();
+           
+        //     if ($(this).is(":checked"))
+        //     {
+        //       value_string+=services+",";
+        //     }
+        // });
+
+        // value_string_all = value_string.replace(/,\s*$/, "");
+
         // Returns successful data submission message when the entered information is stored in database.
-        var dataString = 'name1='+ name + '&company1='+ company + '&email1='+ email + '&phone1='+ phone + '&services=' + value_string_all + '&msg1=' + msg ;
+        // var dataString = 'name1='+ name + '&company1='+ company + '&email1='+ email + '&phone1='+ phone + '&services=' + value_string_all + '&msg1=' + msg ;
+        // var dataString = 'name1='+ name + '&company1='+ company + '&email1='+ email + '&phone1='+ phone + '&msg1=' + msg ;
 
-        console.log(dataString);
-
-        if(name==''||company==''||email==''||phone=='' ||msg == '')
+        if(name=='' || email=='' || phone=='' || msg == '')
             {
                 alert("Please Fill All Fields");
+                $('.spinning').hide();
+                $('#submit').prop('disabled', false);
             }
         else
         {
         
         // AJAX Code To Submit Form.
             $.ajax({
-                //url: "https://e3q50rznqj.execute-api.us-east-1.amazonaws.com/prod",
-                url: "https://pfvh2c8rjd.execute-api.us-west-2.amazonaws.com/prod/",
+                url: "https://e3q50rznqj.execute-api.us-east-1.amazonaws.com/prod",
                 type: "POST",
                 contentType: 'application/json',
                 crossDomain: true,
@@ -251,6 +303,15 @@ $(document).ready(function(){
                 cache: false,
                 success: function(result){
                         $('#success').text("Thank you for contacting us!");
+                        $('.spinning').hide();
+                        $("#name").val('');
+                        $("#email").val('');
+                        $("#phone").val('');
+                        $("#msg").val('');
+                        $('#submit').prop('disabled', false);
+                        setTimeout(function(){
+                            $('#success').text('');
+                        }, 5000);
                 },
                 error: function(err){
                         console.log(err);
@@ -261,4 +322,18 @@ $(document).ready(function(){
     });
 });
 
-/* Contact form Ends */
+/* Testimonial slider */
+
+$(document).ready(function() {
+    $('.cust-slider .carousel-inner .item .slide1').click(function(e){
+        $(this).parent().parent().find($('.slide1')).removeClass("clicked");
+        $(this).addClass("clicked");
+        var clientReview = $(this).find($('.client-review')).html();
+
+        var review_display = $(this).parent().parent().find(".thumbnail-details");
+        review_display.html(clientReview);
+
+        e.preventDefault();
+    });
+
+});
