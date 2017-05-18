@@ -598,6 +598,7 @@ section.cloud-inner .inner-banner .banner-txt {
   text-align: center;
   padding-bottom: 40px;
   line-height: 50px;
+  z-index: 1;
 }
 section.cloud-inner .inner-banner .banner-txt h2 {
   padding: 0;

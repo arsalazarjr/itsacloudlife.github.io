@@ -623,7 +623,7 @@ section.cloud-inner .learn-history .content-block h4 {
 /* Second Slide */
 .demo-1 .bg-2 .sl-slide-inner,
 .demo-1 .bg-2 .sl-content-slice {
-	background: url(../../img/banner.jpg) no-repeat top center;
+	background: url(../../img/banner1.jpg) no-repeat top center;
 }
 
 .demo-1 .bg-2 [data-icon]:after,
@@ -877,7 +877,7 @@ section.cloud-inner .learn-history .content-block h4 {
 /* Inner Pages  */
 
 .cloud-inner h2{
-	background: url(../../img/bottom-border.jpg) no-repeat bottom left;
+	/*background: url(../../img/bottom-border.jpg) no-repeat bottom left;*/
 }
 
 
